@@ -47,9 +47,74 @@
 
             </LinearLayout>
 
+            <!--Gender เลิอกเพศ-->
+            <!--การเลือกอย่างใดอย่างหนึ่ง ต้องมี RadioGroup ครอบเสมอ-->
+            <RadioGroup
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--Male-->
+                <RadioButton
+                    android:layout_weight="1"
+                    android:text="Male"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <!--Female-->
+                <RadioButton
+                    android:layout_weight="1"
+                    android:text="Female"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+            </RadioGroup>
+
             <!--User-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--ICon-->
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_action_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <!--Edit Text-->
+                <EditText
+                    android:inputType="text"
+                    android:hint="@string/user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
             <!--Password-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--ICon Password-->
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_action_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <!--Edit Text Password-->
+                <EditText
+                    android:inputType="text"
+                    android:hint="@string/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
