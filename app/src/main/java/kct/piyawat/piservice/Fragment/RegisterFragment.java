@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import kct.piyawat.piservice.MainActivity;
 import kct.piyawat.piservice.R;
@@ -16,6 +18,9 @@ import kct.piyawat.piservice.R;
  */
 
 public class RegisterFragment extends Fragment{
+
+//    Explicit การประกาศตัวแปร
+    private String nameString,genderString,userString, passwordString;
 
 //    Create Main Method คือ เมธอดที่ทำหน้าที่ เป็นผู้จัดการ
 
@@ -27,7 +32,37 @@ public class RegisterFragment extends Fragment{
 //        Create Toolbar
         createToolbar();
 
+//        Save Controller
+        saveController();
+
     } // Main Method
+
+    private void saveController() {
+        ImageView imageView = getView().findViewById(R.id.imvSave);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                initial View
+                EditText nameEditText = getView().findViewById(R.id.edtName);
+                EditText userEditText = getView().findViewById(R.id.edtUser);
+                EditText passwordEditText = getView().findViewById(R.id.edtPassword);
+
+//                Get Value From EditText To String คือการรับค่าจากตัวแปร EditText ไปเป็น String
+                nameString = nameEditText.getText().toString().trim();
+                userString = userEditText.getText().toString().trim();
+                passwordString = passwordEditText.getText().toString().trim();
+
+//                Check Space
+                if (nameString.equals("")|| userString.equals("") || passwordString.equals("")) {
+                    // Work When Condition is True ===> Have Space
+
+
+                }
+            }// onClick
+
+        });
+    }
 
     private void createToolbar() {
 //        Initial View คือการ Inflater View เข้ามาทำงานใน Java
@@ -36,6 +71,24 @@ public class RegisterFragment extends Fragment{
 
 //        Setup Toolbar คือการกำหนดให้ Toolbar ทำงาน
         ((MainActivity)getActivity()).setSupportActionBar(toolbar);
+
+//        Setup Title of Toolbar คือการเปลี่ยน Title ของ Toolbar
+        ((MainActivity) getActivity())
+                .getSupportActionBar()
+                .setTitle(getResources().getString(R.string.new_register));
+
+//        Visible Button Back
+        ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                คือการสลาย Fragment Register และกลับไปที่หน้าที่มา
+                getActivity().getSupportFragmentManager().popBackStack();
+
+            }
+        });
 
     }
 
