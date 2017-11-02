@@ -41,7 +41,7 @@ public class MainFragment extends Fragment {
                         .beginTransaction()
                         .replace(R.id.contentFragmentMain,new RegisterFragment())
                         .addToBackStack(null)
-                        .commit()
+                        .commit();
 
 
             }
