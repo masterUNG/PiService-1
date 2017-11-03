@@ -9,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 
 import kct.piyawat.piservice.MainActivity;
 import kct.piyawat.piservice.R;
+import kct.piyawat.piservice.utility.MyAlert;
 
 /**
  * Created by asus on 31/10/2560.
@@ -21,6 +23,10 @@ public class RegisterFragment extends Fragment{
 
 //    Explicit การประกาศตัวแปร
     private String nameString,genderString,userString, passwordString;
+
+    // Status of Gender true ==> ยังไม่ได้เลือกเพศ
+    // false ==> มีการเลือก male หรือ female แล้ว
+    private boolean aBoolean = true;
 
 //    Create Main Method คือ เมธอดที่ทำหน้าที่ เป็นผู้จัดการ
 
@@ -35,7 +41,33 @@ public class RegisterFragment extends Fragment{
 //        Save Controller
         saveController();
 
+//        Gender Controller
+        genderController();
+
     } // Main Method
+
+    private void genderController() {
+//        Initial View
+        RadioGroup radioGroup = getActivity().findViewById(R.id.ragGender);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                aBoolean = false;
+                switch (checkedId) {
+
+                    case R.id.radMale:
+                        genderString = "Male";
+                        break;
+                    case R.id.radFeMale:
+                        genderString = "Female";
+                        break;
+
+                }
+
+            } // onChecked
+        });
+    }
 
     private void saveController() {
         ImageView imageView = getView().findViewById(R.id.imvSave);
@@ -56,8 +88,18 @@ public class RegisterFragment extends Fragment{
 //                Check Space
                 if (nameString.equals("")|| userString.equals("") || passwordString.equals("")) {
                     // Work When Condition is True ===> Have Space
+                    MyAlert myAlert = new MyAlert(getActivity());
+                    myAlert.myDialog(getString(R.string.title_have_space),
+                            getString(R.string.message_have_space));
 
+                } else if (aBoolean) {
+                    //Non Choose Gender
+                    MyAlert myAlert = new MyAlert(getActivity());
+                    myAlert.myDialog(getString(R.string.title_gender),
+                            getString(R.string.message_gender));
 
+                } else {
+                    //Upload Value To Server
                 }
             }// onClick
 

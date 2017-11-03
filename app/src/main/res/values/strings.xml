@@ -4,4 +4,8 @@
     <string name="password">Password :</string>
     <string name="new_register">New Register</string>
     <string name="name">Name :</string>
+    <string name="title_have_space">Have Space</string>
+    <string name="message_have_space">Please Fill All Blank</string>
+    <string name="title_gender">Non Choose Gender ?</string>
+    <string name="message_gender">Please Choose Gender Just One</string>
 </resources>

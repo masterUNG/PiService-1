@@ -77,7 +77,7 @@
 
                 <!--Female-->
                 <RadioButton
-                    android:id="@+id/radMale"
+                    android:id="@+id/radFeMale"
                     android:layout_weight="1"
                     android:text="Female"
                     android:layout_width="match_parent"
