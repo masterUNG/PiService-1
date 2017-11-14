@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,9 @@ import android.widget.RadioGroup;
 
 import kct.piyawat.piservice.MainActivity;
 import kct.piyawat.piservice.R;
+import kct.piyawat.piservice.utility.AddNewUserToMySQL;
 import kct.piyawat.piservice.utility.MyAlert;
+import kct.piyawat.piservice.utility.MyConstance;
 
 /**
  * Created by asus on 31/10/2560.
@@ -101,10 +104,34 @@ public class RegisterFragment extends Fragment{
 
                 } else {
                     //Upload Value To Server
+                    uploadValueToServer();
+
+
                 }
             }// onClick
 
         });
+    }
+
+    private void uploadValueToServer() {
+
+        try {
+
+            String tag = "14novV1";
+            MyConstance myConstance = new MyConstance();
+            AddNewUserToMySQL addNewUserToMySQL = new AddNewUserToMySQL(getActivity());
+            addNewUserToMySQL.execute(nameString,genderString,userString,
+            passwordString,myConstance.getUrlAddUserString());
+
+            Log.d(tag, "Result ===> " + addNewUserToMySQL.get());
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     private void createToolbar() {
