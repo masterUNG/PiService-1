@@ -63,6 +63,7 @@ public class RegisterFragment extends Fragment{
                         genderString = "Female";
                         break;
 
+
                 }
 
             } // onChecked
