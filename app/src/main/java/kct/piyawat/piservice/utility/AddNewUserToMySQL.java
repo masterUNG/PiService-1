@@ -34,6 +34,7 @@ public class AddNewUserToMySQL extends AsyncTask<String,Void, String>{
                     .add("User", strings[2])
                     .add("Password", strings[3])
                     .build();
+
             Request.Builder builder = new Request.Builder();
             Request request = builder.url(strings[4]).post(requestBody).build();
             Response response = okHttpClient.newCall(request).execute();
