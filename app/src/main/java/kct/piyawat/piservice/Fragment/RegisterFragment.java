@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import kct.piyawat.piservice.MainActivity;
 import kct.piyawat.piservice.R;
@@ -22,10 +23,10 @@ import kct.piyawat.piservice.utility.MyConstance;
  * Created by asus on 31/10/2560.
  */
 
-public class RegisterFragment extends Fragment{
+public class RegisterFragment extends Fragment {
 
-//    Explicit การประกาศตัวแปร
-    private String nameString,genderString,userString, passwordString;
+    //    Explicit การประกาศตัวแปร
+    private String nameString, genderString, userString, passwordString;
 
     // Status of Gender true ==> ยังไม่ได้เลือกเพศ
     // false ==> มีการเลือก male หรือ female แล้ว
@@ -79,6 +80,7 @@ public class RegisterFragment extends Fragment{
             @Override
             public void onClick(View v) {
 
+
 //                initial View
                 EditText nameEditText = getView().findViewById(R.id.edtName);
                 EditText userEditText = getView().findViewById(R.id.edtUser);
@@ -90,7 +92,7 @@ public class RegisterFragment extends Fragment{
                 passwordString = passwordEditText.getText().toString().trim();
 
 //                Check Space
-                if (nameString.equals("")|| userString.equals("") || passwordString.equals("")) {
+                if (nameString.equals("") || userString.equals("") || passwordString.equals("")) {
                     // Work When Condition is True ===> Have Space
                     MyAlert myAlert = new MyAlert(getActivity());
                     myAlert.myDialog(getString(R.string.title_have_space),
@@ -120,11 +122,27 @@ public class RegisterFragment extends Fragment{
             String tag = "14novV1";
             MyConstance myConstance = new MyConstance();
             AddNewUserToMySQL addNewUserToMySQL = new AddNewUserToMySQL(getActivity());
-            addNewUserToMySQL.execute(nameString,genderString,userString,
-            passwordString,myConstance.getUrlAddUserString());
+            addNewUserToMySQL.execute(nameString, genderString, userString,
+                    passwordString, myConstance.getUrlAddUserString());
+
+            String strResult = addNewUserToMySQL.get();
+            if (Boolean.parseBoolean(strResult)) {
+//                Result True
+                Toast.makeText(getActivity(), "Save User Success", Toast.LENGTH_SHORT).show();
+
+                getActivity().getSupportFragmentManager().popBackStack();
+
+            } else {
+//                Result False
+
+                MyAlert myAlert = new MyAlert(getActivity());
+                myAlert.myDialog("Cannot Save User",
+                        "Please Try Again");
+
+            }
+
 
             Log.d(tag, "Result ===> " + addNewUserToMySQL.get());
-
 
 
         } catch (Exception e) {
@@ -140,7 +158,7 @@ public class RegisterFragment extends Fragment{
         Toolbar toolbar = getView().findViewById(R.id.toolbarRegister);
 
 //        Setup Toolbar คือการกำหนดให้ Toolbar ทำงาน
-        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
+        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
 
 //        Setup Title of Toolbar คือการเปลี่ยน Title ของ Toolbar
         ((MainActivity) getActivity())
@@ -169,7 +187,7 @@ public class RegisterFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_register,container,false);
+        View view = inflater.inflate(R.layout.fragment_register, container, false);
 
         return view;
     }
